@@ -25,7 +25,6 @@ export class Quest<Args extends any[] = []> {
 
         const requirementInstance: QuestRequirement<Args> = QuestRequirement.create(description, requirement);
         this._requirements.set(requirementInstance, false);
-
         return this;
     }
 
@@ -35,7 +34,6 @@ export class Quest<Args extends any[] = []> {
         if (status.total === 0) {
             return 0;
         }
-
         return status.current / status.total;
     }
 
@@ -61,7 +59,6 @@ export class Quest<Args extends any[] = []> {
                 result.push(requirement);
             }
         }
-
         return result;
     }
 
@@ -77,7 +74,6 @@ export class Quest<Args extends any[] = []> {
                 result.push(requirement);
             }
         }
-
         return result;
     }
 
