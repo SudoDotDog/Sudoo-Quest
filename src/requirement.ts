@@ -21,4 +21,13 @@ export class QuestRequirement<Args extends any[] = []> {
         this._description = description;
         this._requirementFunction = requirement;
     }
+
+    public get description(): string {
+        return this._description;
+    }
+
+    public execute(...args: Args): boolean {
+
+        return this._requirementFunction(...args);
+    }
 }
