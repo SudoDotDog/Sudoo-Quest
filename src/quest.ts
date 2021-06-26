@@ -5,6 +5,7 @@
  */
 
 import { QuestRequirementFunction } from "./declare";
+import { QuestRequirement } from "./requirement";
 
 export class Quest<Args extends any[] = []> {
 
@@ -13,7 +14,7 @@ export class Quest<Args extends any[] = []> {
         return new Quest();
     }
 
-    private readonly _requirements: Array<QuestRequirementFunction<Args>>;
+    private readonly _requirements: Array<QuestRequirement<Args>>;
 
     private constructor() {
 
@@ -22,7 +23,9 @@ export class Quest<Args extends any[] = []> {
 
     public requires(description: string, requirement: QuestRequirementFunction<Args>): this {
 
-        this._requirements.push(requirement);
+        const requirementInstance: QuestRequirement<Args> = QuestRequirement.create(description, requirement);
+        this._requirements.push(requirementInstance);
+
         return this;
     }
 }

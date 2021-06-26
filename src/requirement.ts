@@ -6,11 +6,11 @@
 
 import { QuestRequirementFunction } from "./declare";
 
-export class Requirement<Args extends any[] = []> {
+export class QuestRequirement<Args extends any[] = []> {
 
-    public static create<Args extends any[] = []>(description: string, requirement: QuestRequirementFunction<Args>): Requirement<Args> {
+    public static create<Args extends any[] = []>(description: string, requirement: QuestRequirementFunction<Args>): QuestRequirement<Args> {
 
-        return new Requirement(description, requirement);
+        return new QuestRequirement(description, requirement);
     }
 
     private readonly _description: string;
