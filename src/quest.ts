@@ -19,4 +19,10 @@ export class Quest<Args extends any[] = []> {
 
         this._requirements = [];
     }
+
+    public requires(description: string, requirement: QuestRequirementFunction<Args>): this {
+
+        this._requirements.push(requirement);
+        return this;
+    }
 }
