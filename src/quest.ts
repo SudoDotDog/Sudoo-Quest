@@ -14,6 +14,16 @@ export class Quest<Args extends any[] = []> {
         return new Quest([]);
     }
 
+    public static withRequirements<Args extends any[] = []>(...requirements: Array<QuestRequirement<Args>>): Quest<Args> {
+
+        return new Quest(requirements);
+    }
+
+    public static withRequirementList<Args extends any[] = []>(requirements: Array<QuestRequirement<Args>>): Quest<Args> {
+
+        return new Quest(requirements);
+    }
+
     private readonly _requirements: Map<QuestRequirement<Args>, boolean>;
 
     private constructor(requirements: Iterable<QuestRequirement<Args>>) {
