@@ -5,6 +5,7 @@
  */
 
 import { QuestRequirementFunction } from "./declare";
+import { Quest } from "./quest";
 import { QuestRequirement } from "./requirement";
 
 export class QuestDistributer<Args extends any[] = []> {
@@ -41,5 +42,10 @@ export class QuestDistributer<Args extends any[] = []> {
 
         this._requirements.push(requirement);
         return this;
+    }
+
+    public distribute(): Quest<Args> {
+
+        return Quest.withRequirementList([...this._requirements]);
     }
 }
