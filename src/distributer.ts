@@ -11,14 +11,24 @@ export class QuestDistributer<Args extends any[] = []> {
 
     public static create<Args extends any[] = []>(): QuestDistributer<Args> {
 
-        return new QuestDistributer<Args>();
+        return new QuestDistributer<Args>([]);
+    }
+
+    public static withRequirements<Args extends any[] = []>(...requirements: Array<QuestRequirement<Args>>): QuestDistributer<Args> {
+
+        return new QuestDistributer(requirements);
+    }
+
+    public static withRequirementList<Args extends any[] = []>(requirements: Array<QuestRequirement<Args>>): QuestDistributer<Args> {
+
+        return new QuestDistributer(requirements);
     }
 
     private readonly _requirements: Array<QuestRequirement<Args>>;
 
-    private constructor() {
+    private constructor(requirements: Array<QuestRequirement<Args>>) {
 
-        this._requirements = [];
+        this._requirements = requirements;
     }
 
     public requires(description: string, requirement: QuestRequirementFunction<Args>): this {
