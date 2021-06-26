@@ -11,20 +11,29 @@ export class Quest<Args extends any[] = []> {
 
     public static create<Args extends any[] = []>(): Quest<Args> {
 
-        return new Quest();
+        return new Quest([]);
     }
 
     private readonly _requirements: Map<QuestRequirement<Args>, boolean>;
 
-    private constructor() {
+    private constructor(requirements: Iterable<QuestRequirement<Args>>) {
 
         this._requirements = new Map();
+
+        for (const requirement of requirements) {
+            this.addRequirement(requirement);
+        }
     }
 
     public requires(description: string, requirement: QuestRequirementFunction<Args>): this {
 
         const requirementInstance: QuestRequirement<Args> = QuestRequirement.create(description, requirement);
-        this._requirements.set(requirementInstance, false);
+        return this.addRequirement(requirementInstance);
+    }
+
+    public addRequirement(requirement: QuestRequirement<Args>): this {
+
+        this._requirements.set(requirement, false);
         return this;
     }
 
@@ -104,5 +113,10 @@ export class Quest<Args extends any[] = []> {
             }
         }
         return true;
+    }
+
+    public clone(): Quest<Args> {
+
+        return new Quest(this._requirements.keys());
     }
 }
